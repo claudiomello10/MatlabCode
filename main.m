@@ -5,7 +5,7 @@
 % - Only analog precoding/combining during training is used. 
 % - ULAs are assumed
 % References:
-% [1] J. Rodríguez-Fernández, N. González-Prelcic, K. Venugopal and R. W. Heath, "Frequency-Domain Compressive Channel Estimation for Frequency-Selective Hybrid Millimeter Wave MIMO Systems," IEEE Transactions on Wireless Communications, vol. 17, no. 5, pp. 2946-2960, May 2018.
+% [1] J. Rodrï¿½guez-Fernï¿½ndez, N. Gonzï¿½lez-Prelcic, K. Venugopal and R. W. Heath, "Frequency-Domain Compressive Channel Estimation for Frequency-Selective Hybrid Millimeter Wave MIMO Systems," IEEE Transactions on Wireless Communications, vol. 17, no. 5, pp. 2946-2960, May 2018.
 
 clc, clear all;
 
@@ -64,7 +64,7 @@ Phi=zeros(Ntrain*Lr,Nt*Nr);%Initialize measurement matrix Phi in [1,(10)] of siz
                            % Here we are initilizaing the measurement
                            % matrices for all the training symbols, which
                            % correspond to matrix Phi in (13)
-rng(1);
+randn(1);
 tt=randi(Nres,[Nt Ntrain*Lt]);
 for i = 1:Nres
    tt(tt==i) = exp(1i*2*pi*(i-1)/Nres);
