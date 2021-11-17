@@ -50,6 +50,23 @@ snr = 10.^(SNR/10);
 chan_save_file_hdf5 = strcat('RXpilot_SNR',num2str(data_set),'.hdf5');
 chan_save_file_mat  = strcat('RXpilot_SNR',num2str(data_set));
 
+%% calculate NMSE
+function nmse = NMSE_channel(H_hat,H, Nffc)
+% INPUTS    
+% H_hat - Channel estimate
+% H - real channel
+%OUTPUTS NMSE
+    nmse = 0;
+    den = 0;
+    for subcarrier=1:Nffc
+        sub = H_hat(:,:,subcarrier)-H(:,:,subcarrier);
+        H_k = H(:,:,subcarrier);
+        nmse = nmse + norm(sub(:),'fro')^2;
+        den = den + norm(H_k(:),'fro')^2;
+    end
+    nmse = nmse/den;
+end
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Generate training precoders and combiners and matrix Phi in (13) in [1]
 % They are generated as pseudorandom phase shifts. 
@@ -165,19 +182,3 @@ print('-f10', sprintf('Training_%i', data_set), '-dpng')
 
 
 
-%% calculate NMSE
-function nmse = NMSE_channel(H_hat,H, Nffc)
-% INPUTS    
-% H_hat - Channel estimate
-% H - real channel
-%OUTPUTS NMSE
-    nmse = 0;
-    den = 0;
-    for subcarrier=1:Nffc
-        sub = H_hat(:,:,subcarrier)-H(:,:,subcarrier);
-        H_k = H(:,:,subcarrier);
-        nmse = nmse + norm(sub(:),'fro')^2;
-        den = den + norm(H_k(:),'fro')^2;
-    end
-    nmse = nmse/den;
-end
