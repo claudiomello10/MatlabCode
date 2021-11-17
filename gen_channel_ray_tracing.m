@@ -24,7 +24,7 @@ end
 %% load the file
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 channel_data = load(chan_save_file);
-channel_data = channel_data.allEpisodeData
+channel_data = channel_data.allEpisodeData;
 % channel_data has dimensions 8 x 100 x 10000 
 
 % Initialize parameters
